@@ -5,6 +5,7 @@ This project was meant to be a simple example of the Circuit Python languge and 
 ## Requirements
 ### Hardware
 [Feather M0 Express](https://www.adafruit.com/product/3403)
+
 [NeoPixel FeatherWing](https://www.adafruit.com/product/2945)
 ### Software
 No IDE is needed because the Feather Express acts as a flashdrive and code can just be dropped on to it.  All that is needed is a text editor that can edit .py files.  Intsructions for installing Circuit Python onto the board can be found [here](https://learn.adafruit.com/adafruit-feather-m0-express-designed-for-circuit-python-circuitpython/kattni-circuitpython).
