@@ -102,20 +102,6 @@ class Prey(Animal):
 		while((not self.__isValidMove(direction, dispBuff)) and direction != 4):
 			direction = random.randint(0,4)
 		return direction
-	def move(self, dispBuff):
-		direction = self.__decideDirection(dispBuff)
-		if direction != 4:
-			dispBuff[self.x][self.y] = self.blank_color
-			if direction == 0:
-				self.y += 1
-			elif direction == 1:
-				self.x += 1
-			elif direction == 2:
-				self.y -= 1
-			elif direction == 3:
-				self.x -= 1
-			dispBuff[self.x][self.y] = self.color
-		return
 
 ###############################################################################
 # Class Predator
@@ -148,6 +134,34 @@ class Predator(Animal):
 			self.y = random.randint(0,len(disp[0])-1)
 		dispBuff[self.x][self.y] = self.color
 		return
+	
+###############################################################################
+# __isValidMove
+# Descrption: This function determines if a direction is safe to move in.
+#             The predator can move into any open space or a space occupied by prey
+# Arguments: direction - The direction to be checked
+#            dispBuff - The display buffer this object should use
+# Returns: Boolean representing if the move is valid or not
+###############################################################################
+	def __isValidMove(self, direction, dispBuff):
+		valid = False
+		if direction == 0:
+			#Move down
+			if((self.y+1) < len(dispBuff[0]) and (dispBuff[self.x][self.y+1] == self.blank_color or dispBuff[self.x][self.y+1] == self.prey)):
+				valid = True
+		elif direction == 1:
+			#Move right
+			if((self.x+1) < len(dispBuff) and (dispBuff[self.x][self.y+1] == self.blank_color or dispBuff[self.x][self.y+1] == self.prey)):
+				valid = True
+		elif direction == 2:
+			#Move up
+			if((self.y-1) >= 0 and (dispBuff[self.x][self.y+1] == self.blank_color or dispBuff[self.x][self.y+1] == self.prey)):
+				valid = True
+		elif direction == 3:
+			#Move left
+			if((self.x-1) >= 0 and (dispBuff[self.x][self.y+1] == self.blank_color or dispBuff[self.x][self.y+1] == self.prey)):
+				valid = True
+		return valid
 	
 ###############################################################################
 # __decideDirection
@@ -185,14 +199,54 @@ class Predator(Animal):
 			ydiff = prey_locations[smallest_index][1] - self.y
 			# Because the predators can not move diagonally, pick the axis with the largest
 			# difference and move in that direction towards the prey.
+			# The predator attepts to move towards the prey,
+			# if that doesn't work, it tries to go around the block by moving perpendicular,
+			# if that doesn't work, it tries to go around the block by moving away from the prey,
+			# as a last resort, it will just wait until the bock moves.
 			if(abs(xdiff) > abs(ydiff)):
 				if(xdiff > 0):
-					direction = 1
+					if(isValidMove(1)):
+						direction = 1
+					elif(isValidMove(0)):
+						direction = 0
+					elif(isValidMove(2)):
+						direction = 2
+					elif(isValidMove(3)):
+						direction = 3
+					else:
+						direction = 4
 				else:
-					direction = 3
+					if(isValidMove(3)):
+						direction = 3
+					elif(isValidMove(0)):
+						direction = 0
+					elif(isValidMove(2)):
+						direction = 2
+					elif(isValidMove(1)):
+						direction = 1
+					else:
+						direction = 4
 			else:
 				if(ydiff > 0):
-					direction = 0
+					if(isValidMove(0)):
+						direction = 0
+					elif(isValidMove(1)):
+						direction = 1
+					elif(isValidMove(3)):
+						direction = 3
+					elif(isValidMove(2)):
+						direction = 2
+					else:
+						direction = 4
 				else:
-					direction = 2
+					if(isValidMove(2)):
+						direction = 2
+					elif(isValidMove(1)):
+						direction = 1
+					elif(isValidMove(3)):
+						direction = 3
+					elif(isValidMove(4)):
+						direction = 4
+					else:
+						direction = 4
 		return direction
