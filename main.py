@@ -4,6 +4,7 @@ import time
 import Animals
 
 WOLF_COLOR = (255,0,0)
+BEAR_COLOR = (127,127,0)
 RABBIT_COLOR = (40,40,20)
 BLANK_COLOR = (0,10,0)
 
@@ -41,12 +42,11 @@ def updateDisplay():
 	
 #Clear the Display
 updateDisplay()
-#Generate one wolf
+#Generate one wolf and one bear
 wolf = Animals.Predator(WOLF_COLOR, BLANK_COLOR, RABBIT_COLOR, pdata)
+bear = Animals.Predator(BEAR_COLOR, BLANK_COLOR, RABBIT_COLOR, pdata)
 #Generate a list to hold all of the rabbits and add a bunch of them
 rabbits = []
-rabbits.append(Animals.Prey(RABBIT_COLOR, BLANK_COLOR, pdata))
-rabbits.append(Animals.Prey(RABBIT_COLOR, BLANK_COLOR, pdata))
 rabbits.append(Animals.Prey(RABBIT_COLOR, BLANK_COLOR, pdata))
 rabbits.append(Animals.Prey(RABBIT_COLOR, BLANK_COLOR, pdata))
 rabbits.append(Animals.Prey(RABBIT_COLOR, BLANK_COLOR, pdata))
@@ -56,7 +56,7 @@ updateDisplay()
 while(True):
 	# Check to see if any rabbits have been eaten and remove them if they have been
 	for i in range(len(rabbits)):
-		if(wolf.x == rabbits[i].x) and (wolf.y == rabbits[i].y):
+		if(wolf.x == rabbits[i].x) and (wolf.y == rabbits[i].y) or (bear.x == rabbits[i].x) and (bear.y == rabbits[i].y):
 			rabbits.pop(i)
 			break
 	# Move all the remaining rabbits
@@ -65,8 +65,9 @@ while(True):
 	# Update the display to show the rabbits movement and wait for a little before moving the wolves
 	updateDisplay()
 	time.sleep(0.5)
-	# Move the wolf
+	# Move the predators
 	wolf.move(pdata)
+	bear.move(pdata)
 	# Update the display to show the wolf's movement and wait for a little before moving the rabbits again
 	updateDisplay()
 	time.sleep(0.3)
