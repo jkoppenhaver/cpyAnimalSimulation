@@ -19,8 +19,8 @@ class Animal(object):
 		self.x = random.randint(0,len(dispBuff)-1)
 		self.y = random.randint(0,len(dispBuff[0])-1)
 		while(dispBuff[self.x][self.y] != self.blank_color):
-			self.x = random.randint(0,len(disp)-1)
-			self.y = random.randint(0,len(disp[0])-1)
+			self.x = random.randint(0,len(dispBuff)-1)
+			self.y = random.randint(0,len(dispBuff[0])-1)
 		dispBuff[self.x][self.y] = self.color
 		return
 ###############################################################################
@@ -130,8 +130,8 @@ class Predator(Animal):
 		self.x = random.randint(0,len(dispBuff)-1)
 		self.y = random.randint(0,len(dispBuff[0])-1)
 		while(dispBuff[self.x][self.y] != self.blank_color):
-			self.x = random.randint(0,len(disp)-1)
-			self.y = random.randint(0,len(disp[0])-1)
+			self.x = random.randint(0,len(dispBuff)-1)
+			self.y = random.randint(0,len(dispBuff[0])-1)
 		dispBuff[self.x][self.y] = self.color
 		return
 	
@@ -151,15 +151,15 @@ class Predator(Animal):
 				valid = True
 		elif direction == 1:
 			#Move right
-			if((self.x+1) < len(dispBuff) and (dispBuff[self.x][self.y+1] == self.blank_color or dispBuff[self.x][self.y+1] == self.prey)):
+			if((self.x+1) < len(dispBuff) and (dispBuff[self.x+1][self.y] == self.blank_color or dispBuff[self.x+1][self.y] == self.prey)):
 				valid = True
 		elif direction == 2:
 			#Move up
-			if((self.y-1) >= 0 and (dispBuff[self.x][self.y+1] == self.blank_color or dispBuff[self.x][self.y+1] == self.prey)):
+			if((self.y-1) >= 0 and (dispBuff[self.x][self.y-1] == self.blank_color or dispBuff[self.x][self.y-1] == self.prey)):
 				valid = True
 		elif direction == 3:
 			#Move left
-			if((self.x-1) >= 0 and (dispBuff[self.x][self.y+1] == self.blank_color or dispBuff[self.x][self.y+1] == self.prey)):
+			if((self.x-1) >= 0 and (dispBuff[self.x-1][self.y] == self.blank_color or dispBuff[self.x-1][self.y] == self.prey)):
 				valid = True
 		return valid
 	
@@ -205,47 +205,47 @@ class Predator(Animal):
 			# as a last resort, it will just wait until the bock moves.
 			if(abs(xdiff) > abs(ydiff)):
 				if(xdiff > 0):
-					if(isValidMove(1)):
+					if(self.__isValidMove(1, dispBuff)):
 						direction = 1
-					elif(isValidMove(0)):
+					elif(self.__isValidMove(0, dispBuff)):
 						direction = 0
-					elif(isValidMove(2)):
+					elif(self.__isValidMove(2, dispBuff)):
 						direction = 2
-					elif(isValidMove(3)):
+					elif(self.__isValidMove(3, dispBuff)):
 						direction = 3
 					else:
 						direction = 4
 				else:
-					if(isValidMove(3)):
+					if(self.__isValidMove(3, dispBuff)):
 						direction = 3
-					elif(isValidMove(0)):
+					elif(self.__isValidMove(0, dispBuff)):
 						direction = 0
-					elif(isValidMove(2)):
+					elif(self.__isValidMove(2, dispBuff)):
 						direction = 2
-					elif(isValidMove(1)):
+					elif(self.__isValidMove(1, dispBuff)):
 						direction = 1
 					else:
 						direction = 4
 			else:
 				if(ydiff > 0):
-					if(isValidMove(0)):
+					if(self.__isValidMove(0, dispBuff)):
 						direction = 0
-					elif(isValidMove(1)):
+					elif(self.__isValidMove(1, dispBuff)):
 						direction = 1
-					elif(isValidMove(3)):
+					elif(self.__isValidMove(3, dispBuff)):
 						direction = 3
-					elif(isValidMove(2)):
+					elif(self.__isValidMove(2, dispBuff)):
 						direction = 2
 					else:
 						direction = 4
 				else:
-					if(isValidMove(2)):
+					if(self.__isValidMove(2, dispBuff)):
 						direction = 2
-					elif(isValidMove(1)):
+					elif(self.__isValidMove(1, dispBuff)):
 						direction = 1
-					elif(isValidMove(3)):
+					elif(self.__isValidMove(3, dispBuff)):
 						direction = 3
-					elif(isValidMove(4)):
+					elif(self.__isValidMove(4, dispBuff)):
 						direction = 4
 					else:
 						direction = 4
