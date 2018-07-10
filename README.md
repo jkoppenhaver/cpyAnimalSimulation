@@ -25,8 +25,8 @@ This program uses colored dots on the NeoPixel Display to simulate predators and
 ### ocean.py
 This program has one predator and many prey.  It has a blue background, one white shark, and four orange fish.  The shark will chase the fish until they are all gone and then it will roam the map randomly.
 
-![](https://i.imgur.com/Qom8eBt.gif | width = 250px)
+![](https://i.imgur.com/Qom8eBt.gif)
 ### forest.py
 This program has two predators and many prey.  It has a green background, one red wolf, one yellow bear, and four white rabbits.  The wolf and bear will chase the rabbits until they are all gone and then they will roam the map randomly.  This program demonstrates that it is possible to have two predators that do on chase or interact with each other.
 
-![](https://i.imgur.com/XFh5fHI.gif | width = 250px)
+![](https://i.imgur.com/K92xpss.gif)
