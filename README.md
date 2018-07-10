@@ -24,5 +24,9 @@ The animal class has become too large to run properly on the Feather M0 board so
 This program uses colored dots on the NeoPixel Display to simulate predators and prey.  The prey move around the display randomly and the predator chases the closest prey.  If the predator catches the prey, the prey is removed from the display.  Two example files are provided as demonstrations.
 ### ocean.py
 This program has one predator and many prey.  It has a blue background, one white shark, and four orange fish.  The shark will chase the fish until they are all gone and then it will roam the map randomly.
+
+![](https://i.imgur.com/Qom8eBt.gif)
 ### forest.py
 This program has two predators and many prey.  It has a green background, one red wolf, one yellow bear, and four white rabbits.  The wolf and bear will chase the rabbits until they are all gone and then they will roam the map randomly.  This program demonstrates that it is possible to have two predators that do on chase or interact with each other.
+
+![](https://i.imgur.com/XFh5fHI.gif)
